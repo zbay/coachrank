@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <head>
+    <title>American GDP by Year</title>
+    <style>
+    body{
+    	background-color: #663300;
+    }
+    .card{
+    	background-color: green;
+    	color: white;
+    }
+    .title{
+    	
+    }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="title">NFL Offensive Coach Rankings</div>
+      <svg id="chart"></svg>
+    </div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+  <script>
+  $('document').ready(function(){
+  	d3.csv("./coachsummary.csv", function(data){
+  		//data[58] is average]
+  	});
+
+  });
+  </script>
+</html>
