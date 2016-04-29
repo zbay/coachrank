@@ -1,21 +1,23 @@
     body{
-    	background-color: #663300;
+    	background-color: #8B7E66;
+    	font-family: verdana;
     }
     .card{
-    	background-color: green;
+    	background-color: #2E8B57;
     	color: white;
     }
     .title{
     	text-align:center;
     }
     rect{
-      fill: #663300;
+      fill: #8B7E66;
+      stroke:white;
     }
     .axis{
       fill:white;
     }
     .mouseover{
-      fill:orange;
+      fill:#FFD700;
       /*filter:brightness(200%);*/
     }
     .chart .mouseover{
@@ -23,12 +25,24 @@
     }
     .tooltip{
          position: absolute;
-         background-color: green;
+         background-color: black;
          padding: 3px 5px 3px 5px;
          box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
          border-radius: 5px;
     }
-    .infobox{
+    #infobox{
         text-align:center;
     }
-    
+    .logo{
+        margin-left: auto;
+        margin-right: auto;
+        border-radius:3px;
+    }
+    #acknowledgements{
+        background-color:#FFD700;
+        text-align: center;
+        padding: 10px;
+    }
+    #chart{
+     fill: url("./img/footballfield.png");   
+    }

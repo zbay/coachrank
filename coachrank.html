@@ -9,14 +9,14 @@
     <div class="card">
       <div class="title">NFL Offensive Coach Rankings</div>
       <label>Pick a category: </label>
-      <select name="category">
+      <select name="category" id="statSelector">
         <optgroup label="Passing">
-          <option value="PassAtt">Pass Attempts</option>
+          <option value="PassAtt" selected="selected">Pass Attempts</option>
           <option value="PassCmp">Pass Completions</option>
           <option value="CompletionPrct">Completion %</option>
           <option value="PassYds">Passing Yards</option>
           <option value="PassTDs">Passing TDs</option>
-          <option value="Ints">Interceptions</option>
+          <option value="PassInt">Interceptions</option>
           <option value="YdsPerPass">Yards Per Pass</option>
         </optgroup>
         <optgroup label="Rushing Totals">
@@ -26,41 +26,55 @@
           <option value="TopRushYds">Rush Yards By Leader</option>
           <option value="RushTDs">Total Rush TDs</option>
           <option value="TopRushTDs">Rush TDs By Leader</option>
-          <option value="QbRushYds">QB Rush Yards</option>
-          <option value="YPC">Yards Per Carry</option>
+          <option value="QbRuYds">QB Rush Yards</option>
+          <option value="YdsPerRush">Yards Per Carry</option>
         </optgroup>
         <optgroup label="Receiving Totals">
           <option value="TopWrRec">Catches By Leading WR</option>
-          <option value="StartingWrRec">Catches By Top Two WRs</option>
+          <option value="TopTwoWrRec">Catches By Top Two WRs</option>
           <option value="TopWrYds">Yards By Leading WR</option>
-          <option value="StartingWrYds">Yards By Top Two WRs</option>
-          <option value="TopWrYds">TDs By Leading WR</option>
-          <option value="StartingWrTDs">TDs By Top Two WRs</option>
+          <option value="TopTwoWrYds">Yards By Top Two WRs</option>
+          <option value="TopWrTDs">TDs By Leading WR</option>
+          <option value="TopTwoWrTDs">TDs By Top Two WRs</option>
           <option value="TopTeRec">Catches By Leading TE</option>
           <option value="TopTeYds">Yards By Leading TE</option>
           <option value="TopTeTDs">TDs By Leading TE</option>
-          <option value="TobRbRec">Catches By Leading RB</option>
-          <option value="TopRbRecYds">Receivng Yards By Leading RB</option>
+          <option value="TopRbRecs">Catches By Leading RB</option>
+          <option value="TopRbReYds">Receivng Yards By Leading RB</option>
         </optgroup>
         <optgroup label="Rushing Proportions">
-          <option value="TopRushPrct">% Rushes By Leader</option>
+          <option value="TopRushAttPrct">% Rushes By Leader</option>
           <option value="TopRushYdsPrct">% Rush Yards By Leader</option>
-          <option value="TopRushTdPrct">% Rush TDs By Leader</option>
+          <option value="TopRushTDsPrct">% Rush TDs By Leader</option>
         </optgroup>
         <optgroup label="Receiving Proportions">
           <option value="TopWrRecPrct">% Catches By Leading WR</option>
           <option value="StartingWrRecPrct">% Catches By Top Two WRs</option>
           <option value="TopWrYdsPrct">% Yards By Leading WR</option>
-          <option value="StartingWRYdsPrct">% Yards By Top Two WRs</option>
+          <option value="StartingWrYdsPrct">% Yards By Top Two WRs</option>
+          <option value="TopWrTDsPrct">% TDs By Top WR</option>
+          <option value="StartingWrTDsPrct">% TDs By Top Two WRs</option>
           <option value="TopTeRecPrct">% Catches By Leading TE</option>
           <option value="TopTeYdsPrct">% Yards By Leading TE</option>
-          <option value="TopTeTdPrct">% TDs By Leading TE</option>
+          <option value="TopTeTdsPrct">% TDs By Leading TE</option>
           <option value="TopRbRecPrct">% Catches By Leading RB</option>
-          <option value="TopRbRecYdsPrct">% Receiving Yards By Leading RB</option>
+          <option value="TopRbReYdsPrct">% Receiving Yards By Leading RB</option>
         </optgroup>
+      </select>&nbsp;
+      <label>Average Type</label>
+      <select name="averageType" id="averageSelector">
+        <option value="mean" selected="selected">Mean</option>
+        <option value="median">Median</option>
       </select>
       <svg id="chart"></svg>
+      <br />
     </div>
+    <div id="acknowledgements">
+      All data used in this visualization was derived from statistics freely available from 
+      <a href="http://www.pro-football-reference.com/">Pro Football Reference</a>.<br /><br />
+      All NFL logos used in this visualization were originally downloaded from <a href="http://www.sportslogos.net/">SportsLogos.net</a>.<br /><br />
+      &copy; 2016 - Zbay Industries
+      </div>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
