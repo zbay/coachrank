@@ -13,6 +13,9 @@
       fill: #8B7E66;
       stroke:white;
     }
+    #avgBar{
+        fill:red;
+    }
     .axis{
       fill:white;
     }

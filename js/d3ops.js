@@ -10,8 +10,8 @@
         left: 75
 };
 
-var width = 1100 - margin.left - margin.right;
-var height = 600 - margin.top - margin.bottom;
+var width = (window.innerWidth - margin.right - margin.left) * 0.9;
+var height = (window.innerHeight - margin.top - margin.bottom) * 0.8;
 
 var infobox = d3.select(".card").append("div")
       .attr("class", "tooltip")
@@ -45,21 +45,21 @@ var infobox = d3.select(".card").append("div")
   		var xAxis = d3.svg.axis()
       .scale(xScale)
       .orient("bottom")
-      .ticks((data.length)/5);
+      .ticks(Math.floor(((data.length)/5) * (width/1100)));
 
       var yAxis = d3.svg.axis()
       .scale(yScale)
       .orient("left")
-      .ticks(10)
+      .ticks(Math.floor(10 * (height/650)))
       .tickFormat(yAxisFormat);
  chart.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis)
        .append("text")
-       .attr("x", width/2)
+       .attr("x", (width/2) - 120)
        .attr("y", 40)
-       .text("Rank among current head coaches and offensive coordinators");
+       .text("Rank among current HCs and OCs");
 chart.append("g")
       .attr("class", "y axis")
       .call(yAxis)
@@ -85,6 +85,14 @@ chart.append("g")
       .attr("height", function(d){
           return height - yScale(d[category]);
         })
+      .attr("id", function(d){
+        if(d["Coach"] == "Average"){
+          return "avgBar"
+        }
+        else{
+          return "";
+        }
+      })
       .on("mouseover", function(d, i){
         console.log(d);
         var yearWord = d["YrsExp"] == 1 ? "year" : "years";
@@ -93,9 +101,11 @@ chart.append("g")
         infobox.transition()
           .duration(100)
           .style("opacity", 0.65)
-          .style("left", (d3.event.pageX + 5) + "px")
-          .style("top", (d3.event.pageY - 150) + "px");
-          infobox.html("<br /><img class='logo' width='100' src='" + "./img/" + d["Team"] + ".png'" + "/><br /><br /><span class='name'>" + (d["Coach"] || d["Name"]) + ", " + d["Team"] + " " + d["Position"] + "</span><br /><br /><span class='exactNumber'>" + 
+          .style("left", (d3.event.pageX -150) + "px")
+          .style("top", (d3.event.pageY - 200) + "px");
+          infobox.html("<br /><img class='logo' width='100' src='" + "./img/" + d["Team"] + ".png'" + "/><br /><br /><span class='name'>" + 
+          (d["Coach"] != "Average" ? (d["Coach"]): ("NFL")) + ", " + (d["Coach"] != "Average" ? (d["Team"]): ("")) + " " + 
+          (d["Coach"] != "Average" ? (d["Position"]) : ("average active HC or OC")) + "</span><br /><br /><span class='exactNumber'>" + 
           (renderPercent ? ((100 * d[category]).toFixed(2)) : (d[category]))
           + " " + statUnits(category) + "</span><br /><span class='expNum'>in " + d["YrsExp"] + " " + yearWord + " of OC or HC experience</span>");
       })
@@ -113,6 +123,8 @@ chart.append("g")
   	   visualize(currentCategory, renderPercent, currentAverage); //default render
   	});
   	
+d3.select(window).on('resize', resize); 
+  	
   $("#statSelector").on("change", function(){
     currentCategory = $("#statSelector").val();
     renderPercent = currentCategory.slice(-4) == "Prct";
@@ -127,6 +139,14 @@ chart.append("g")
     visualize(currentCategory, renderPercent, currentAverage);
   });
   
+  function resize(){
+width = (window.innerWidth - margin.right - margin.left) * 0.9;
+height = (window.innerHeight - margin.top - margin.bottom) * 0.8;
+$("#chart").empty(); //erase previous chart
+ visualize(currentCategory, renderPercent, currentAverage);
+
+  }
+  
   function statUnits(category){
     switch(category){
       case "PassAtt":
@@ -134,7 +154,7 @@ chart.append("g")
       case "RushAtt":
         return "Rush attempts per year";
       case "PassCmp":
-        return "Pass completions per Year";
+        return "Pass completions per year";
       case "PassYds":
         return "Passing yards per year";
       case "RushYds":
